@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传测试页面</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .upload-section {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="file"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>文件上传测试页面</h1>
+    
+    <!-- 单文件上传测试 -->
+    <div class="upload-section">
+        <h2>单文件上传测试</h2>
+        <form action="http://localhost:8080/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="s_file">选择文件:</label>
+                <input type="file" id="file" name="s_file" required>
+            </div>
+            <input type="submit" value="上传单个文件">
+        </form>
+    </div>
+    
+    <!-- 批量文件上传测试 -->
+    <div class="upload-section">
+        <h2>批量文件上传测试</h2>
+        <form action="http://localhost:8080/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="s_files">选择多个文件:</label>
+                <input type="file" id="files" name="s_files" multiple required>
+            </div>
+            <input type="submit" value="上传多个文件">
+        </form>
+    </div>
+</body>
+</html>

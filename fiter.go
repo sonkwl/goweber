@@ -14,6 +14,7 @@ type FileUploader struct {
 	MaxSize      int64
 	AllowedTypes []string
 	SavePath     string
+	MaxFiles     int //一次最大上传文件数量
 	FieldName    string // 添加单文件字段名
 	FieldNames   string // 添加多文件字段名
 	Keyword      string // 添加文件名关键字
@@ -73,6 +74,10 @@ func (f *FileUploader) HandleUpload(r *http.Request) ([]string, error) {
 
 	// 处理多个文件
 	var savedPaths []string
+	// files 最多不超过Maxfiles定义数量
+	if len(files) > f.MaxFiles {
+		return nil, fmt.Errorf("最多上传%d个文件", f.MaxFiles)
+	}
 	for _, fileHeader := range files {
 		file, err := fileHeader.Open()
 		if err != nil {
@@ -101,6 +106,11 @@ func (f *FileUploader) saveSingleFile(file multipart.File, header *multipart.Fil
 	// 生成新的文件名：时间戳+关键字+扩展名
 	ext := filepath.Ext(header.Filename)
 	timestamp := time.Now().Unix()
+	
+	// 判断f.SavePaht目录是否存在
+	if _, err := os.Stat(f.SavePath); os.IsNotExist(err) {
+		os.MkdirAll(f.SavePath, os.ModePerm)
+	}
 
 	// 创建新的文件名
 	newFilename := fmt.Sprintf("%d_%s%s", timestamp, f.Keyword, ext)
