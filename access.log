@@ -299,3 +299,7 @@
 2025/09/15 17:09:35 apper HTTP is running in port:8080
 2025/09/15 17:09:43 ::1 POST /upload
 2025/09/15 17:09:43 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2025/10/30 10:09:36 apper HTTP is running in port:8080
+2025/10/30 10:15:28 apper HTTP is running in port:8080
+2025/10/30 10:21:49 ::1 GET /cache
+2025/10/30 10:21:49 ::1 GET /favicon.ico Not Found 404
