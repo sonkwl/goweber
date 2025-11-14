@@ -1,6 +1,6 @@
 # goweber
 
-#### 介绍
+#### Introduction
 goweber is a WEB framework written in GO, mainly used for API services. 
 Supported features:
 - Routing
@@ -9,6 +9,9 @@ Supported features:
 - IP-based rate limiting
 - Middleware service, supporting global and route-level
 - JWT support
+
+#### Data Structure
+![数据结构](structs.drawio.png)
 
 
 #### Installation Guide

@@ -10,6 +10,9 @@ goweber是一個GO編寫的WEB框架，主要用於API服務。
 - 中間件服務，支持全局和路由級
 - 支持JWT
 
+#### 數據結構
+![数据结构](structs.drawio.png)
+
 
 #### 安装教程
 
