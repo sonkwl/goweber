@@ -88,6 +88,14 @@ func TestApp(t *testing.T) {
 		}
 		fmt.Fprintf(w, "文件上传成功，保存路径: %v", savePaths)
 	})
+	
+	// * 測試behaver
+	app.Get("/behaver",func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(app.Bh)
+		fmt.Println(app.Bh.IpMontion["::1"])
+		fmt.Println(app.Bh.IpDisable)
+		fmt.Fprintf(w, "behaver")
+	});
 
 	fmt.Println(app)
 	app.Run()

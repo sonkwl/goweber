@@ -68,6 +68,9 @@ type Apper struct {
 	// 文件上传
 	// File upload
 	File *FileUploader
+	// 用戶行爲監控
+	// user behavior monitoring
+	Bh *Behaver
 }
 
 // New 创建并初始化一个新的Apper实例
@@ -86,6 +89,7 @@ func New() *Apper {
 		ratelimit: 100,
 		Jwt: NewJwter(),
 		File: NewFileUploader(10<<20,nil,"./upload"),
+		Bh: NewBehaver(),
 	}
 	app.SetConfig()
 	app.SetLog()
@@ -94,6 +98,7 @@ func New() *Apper {
 	app.SetLimit()
 	app.SetJwt()
 	app.SetFile()
+	app.SetBehaver()
 	return app
 }
 
@@ -220,6 +225,22 @@ func (this *Apper) SetFile() {
 	}
 }
 
+// SetBehaver
+func (this *Apper) SetBehaver() {
+	if this.config.Get("behaver", "ipmax") != "" {
+		this.Bh.IpMax,_= strconv.Atoi(this.config.Get("behaver", "ipmax"))
+	} 
+	if this.config.Get("behaver", "ipmax") != "" {
+		this.Bh.Expire,_= strconv.ParseInt(this.config.Get("behaver", "expire"),10,64)
+	}
+	if this.config.Get("behaver", "cleansecond") != "" {
+		this.Bh.CleanSecond,_= strconv.ParseInt(this.config.Get("behaver", "cleansecond"),10,64)
+	} 
+	if this.Bh.IpMax > 0 {
+		go this.Bh.Clear()
+	}
+}
+
 // GetClientIP 获取客户端真实IP地址
 // GetClientIP get client real IP address
 func (this *Apper) GetClientIP(r *http.Request) string {
@@ -328,7 +349,7 @@ func (this *Apper) getLimiter(ip string) *rate.Limiter {
 		// Clear 50% of the earliest added IPs
 		this.clearLimiter()
 	}
-	this.iplimiter[ip] = rate.NewLimiter(rate.Every(1*time.Minute), this.ratelimit)
+	this.iplimiter[ip] = rate.NewLimiter(rate.Every(1*time.Second), this.ratelimit)
 	return this.iplimiter[ip]
 }
 
@@ -351,8 +372,28 @@ func (this *Apper) clearLimiter() {
 // ServeHTTP 实现http.Handler接口，处理HTTP请求
 // ServeHTTP implements the http.Handler interface to handle HTTP requests
 func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	
 	urlSpit := strings.Split(r.URL.String(), "?")
 	ipaddr := this.GetClientIP(r)
+	
+	// 檢測url
+	// if this.Bh.RegexUrl(r.URL.String()) {
+	// 	this.Bh.Lock(ipaddr)
+	// }
+	// IP行爲判斷
+	if this.Bh.CheckNotFound(ipaddr) {
+		this.Bh.Lock(ipaddr)
+	}
+	if this.Bh.CheckScan(ipaddr) {
+		this.Bh.Lock(ipaddr)
+	}
+	// IP是否鎖定
+	if this.Bh.IsLock(ipaddr) {
+		this.msg <- ipaddr+"被鎖定"
+		http.Error(w, ipaddr+"被鎖定", http.StatusTooManyRequests)
+		return
+	}
+	
 	
 	// * 限流處理
 	// * Rate limiting processing
@@ -390,10 +431,12 @@ func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if h, ok := this.rmap[r.Method][urlSpit[0]]; ok {
-		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String()
+		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " 200 OK"
+		this.Bh.Record(ipaddr,200)
 		h(w, r)
 	} else {
 		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " Not Found 404"
+		this.Bh.Record(ipaddr,404)
 		http.NotFound(w, r)
 	}
 }
