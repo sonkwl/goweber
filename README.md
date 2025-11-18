@@ -9,6 +9,7 @@ goweber是一個GO編寫的WEB框架，主要用於API服務。
 - 基於IP的限流
 - 中間件服務，支持全局和路由級
 - 支持JWT
+- 用戶行爲監控
 
 #### 數據結構
 ![数据结构](structs.drawio.png)
@@ -87,4 +88,17 @@ path = ./files
 # 文件类型
 # File types
 type = .jpg,.png
+
+# 用戶行爲監控
+# user behaver monitor
+[behaver]
+# 最大監控IP數量, 0表示不監控
+# Maximum monitoring IP quantity, 0 means not monitored
+ipmax = 1000
+# 監控IP過期時間，秒
+# Monitoring IP expiration time, seconds
+expire = 300
+# 監控IP清理間隔，秒
+# Monitoring IP cleanup interval, seconds
+cleansecond = 300
 ```

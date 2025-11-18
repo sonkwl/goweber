@@ -9,6 +9,7 @@ Supported features:
 - IP-based rate limiting
 - Middleware service, supporting global and route-level
 - JWT support
+- user behaver monitor
 
 #### Data Structure
 ![数据结构](structs.drawio.png)
@@ -87,4 +88,17 @@ path = ./files
 # 文件类型
 # File types
 type = .jpg,.png
+
+# 用戶行爲監控
+# user behaver monitor
+[behaver]
+# 最大監控IP數量, 0表示不監控
+# Maximum monitoring IP quantity, 0 means not monitored
+ipmax = 1000
+# 監控IP過期時間，秒
+# Monitoring IP expiration time, seconds
+expire = 300
+# 監控IP清理間隔，秒
+# Monitoring IP cleanup interval, seconds
+cleansecond = 300
 ```
