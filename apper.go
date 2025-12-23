@@ -25,7 +25,7 @@ type Apper struct {
 	rmap map[string]map[string]http.HandlerFunc
 	// 配置信息结构体指针
 	// Configuration information struct pointer
-	config *Configer
+	Config *Configer
 	// 服务器监听端口
 	// Server listening port
 	port string
@@ -82,7 +82,7 @@ func New() *Apper {
 		rmap:   make(map[string]map[string]http.HandlerFunc),
 		port:   "8080",
 		logmax: 102400000,
-		config: &Configer{
+		Config: &Configer{
 			params: make(map[string]map[string]string),
 		},
 		msg: make(chan string),
@@ -124,8 +124,8 @@ func (this *Apper) SetConfig() {
 		// panic("Failed to read config.ini file")
 	}
 	// defer configfile.Close()
-	this.config.SetFile(configfile)
-	// fmt.Println(this.config.params)
+	this.Config.SetFile(configfile)
+	// fmt.Println(this.Config.params)
 }
 
 // SetLog 根据配置设置日志记录器
@@ -133,7 +133,7 @@ func (this *Apper) SetConfig() {
 func (this *Apper) SetLog() {
 	// * 检测是否有访问日志
 	// * Check if there is access log
-	logpath := this.config.Get("server", "logfile")
+	logpath := this.Config.Get("server", "logfile")
 	if logpath != "" {
 		logfile, err := os.OpenFile(logpath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
@@ -143,7 +143,7 @@ func (this *Apper) SetLog() {
 		this.logfile = logfile
 		this.log = log.New(logfile, "", log.LstdFlags)
 	}
-	logmax := this.config.Get("server", "logmax")
+	logmax := this.Config.Get("server", "logmax")
 	if logmax != "" {
 		this.logmax, _ = strconv.ParseInt(logmax, 10, 64)
 	}
@@ -152,15 +152,15 @@ func (this *Apper) SetLog() {
 // SetPort 从配置中设置服务器端口，默认为8080
 // SetPort sets the server port from configuration, default is 8080
 func (this *Apper) SetPort() {
-	if this.config.Get("server", "port") != "" {
-		this.port = this.config.Get("server", "port")
+	if this.Config.Get("server", "port") != "" {
+		this.port = this.Config.Get("server", "port")
 	}
 }
 
 // SetCache 缓存设置
 // SetCache cache settings
 func (this *Apper) SetCache() { 
-	cachesize:= this.config.Get("server", "cache")
+	cachesize:= this.Config.Get("server", "cache")
 	if cachesize!="" && cachesize!="0" {
 		size,_:=strconv.ParseInt(cachesize,10,64)
 		this.Cache=NewCacher(size)
@@ -172,53 +172,53 @@ func (this *Apper) SetCache() {
 // SetLimit 設置限流
 // SetLimit set rate limiting
 func (this *Apper) SetLimit() {
-	if this.config.Get("server", "ipmax") != "" {
-		this.ipmax ,_= strconv.Atoi(this.config.Get("server", "ipmax"))
+	if this.Config.Get("server", "ipmax") != "" {
+		this.ipmax ,_= strconv.Atoi(this.Config.Get("server", "ipmax"))
 		// 開啓限流
 		// Enable rate limiting
 		if this.ipmax>0 {
 			this.iplimiter=make(map[string]*rate.Limiter,0)
 		}
 	}
-	if this.config.Get("server", "ratelimit") != "" {
-		this.ratelimit,_= strconv.Atoi(this.config.Get("server", "ratelimit"))
+	if this.Config.Get("server", "ratelimit") != "" {
+		this.ratelimit,_= strconv.Atoi(this.Config.Get("server", "ratelimit"))
 	}
 }
 
 // jwt 设置
 // JWT settings
 func (this *Apper) SetJwt() {
-	if this.config.Get("jwt", "rint") != "" { 
-		this.Jwt.Rint,_= strconv.Atoi(this.config.Get("jwt", "rint"))
+	if this.Config.Get("jwt", "rint") != "" { 
+		this.Jwt.Rint,_= strconv.Atoi(this.Config.Get("jwt", "rint"))
 	}
-	if this.config.Get("jwt", "exp") != "" {
-		this.Jwt.Exphour,_= strconv.Atoi(this.config.Get("jwt", "exp"))
+	if this.Config.Get("jwt", "exp") != "" {
+		this.Jwt.Exphour,_= strconv.Atoi(this.Config.Get("jwt", "exp"))
 	}
-	if this.config.Get("jwt", "rstr") != "" {
-		this.Jwt.Rstr= this.config.Get("jwt", "rstr")
+	if this.Config.Get("jwt", "rstr") != "" {
+		this.Jwt.Rstr= this.Config.Get("jwt", "rstr")
 	}
-	if this.config.Get("jwt", "version") != "" {
-		this.Jwt.Version= this.config.Get("jwt", "version")
+	if this.Config.Get("jwt", "version") != "" {
+		this.Jwt.Version= this.Config.Get("jwt", "version")
 	}
 }
 
 // SetFile 设置上传文件
 // SetFile set file upload
 func (this *Apper) SetFile() { 
-	if this.config.Get("file", "size") != "" {
-		size,_:=strconv.ParseInt(this.config.Get("file", "size"),10,64)
+	if this.Config.Get("file", "size") != "" {
+		size,_:=strconv.ParseInt(this.Config.Get("file", "size"),10,64)
 		//转换成MB
 		// Convert to MB
 		this.File.MaxSize= size * 1024 * 1024
 	}
-	if this.config.Get("file", "max") != "" {
-		this.File.MaxFiles,_= strconv.Atoi(this.config.Get("file", "max")) 
+	if this.Config.Get("file", "max") != "" {
+		this.File.MaxFiles,_= strconv.Atoi(this.Config.Get("file", "max")) 
 	}
-	if this.config.Get("file", "path") != "" {
-		this.File.SavePath=this.config.Get("file", "path")
+	if this.Config.Get("file", "path") != "" {
+		this.File.SavePath=this.Config.Get("file", "path")
 	}
-	if this.config.Get("file", "type") != "" {
-		filetypes:=this.config.Get("file", "type")
+	if this.Config.Get("file", "type") != "" {
+		filetypes:=this.Config.Get("file", "type")
 		// 按逗号隔开，返回[]string
 		// Split by comma, return []string
 		this.File.AllowedTypes=strings.Split(filetypes, ",")
@@ -227,14 +227,14 @@ func (this *Apper) SetFile() {
 
 // SetBehaver
 func (this *Apper) SetBehaver() {
-	if this.config.Get("behaver", "ipmax") != "" {
-		this.Bh.IpMax,_= strconv.Atoi(this.config.Get("behaver", "ipmax"))
+	if this.Config.Get("behaver", "ipmax") != "" {
+		this.Bh.IpMax,_= strconv.Atoi(this.Config.Get("behaver", "ipmax"))
 	} 
-	if this.config.Get("behaver", "ipmax") != "" {
-		this.Bh.Expire,_= strconv.ParseInt(this.config.Get("behaver", "expire"),10,64)
+	if this.Config.Get("behaver", "ipmax") != "" {
+		this.Bh.Expire,_= strconv.ParseInt(this.Config.Get("behaver", "expire"),10,64)
 	}
-	if this.config.Get("behaver", "cleansecond") != "" {
-		this.Bh.CleanSecond,_= strconv.ParseInt(this.config.Get("behaver", "cleansecond"),10,64)
+	if this.Config.Get("behaver", "cleansecond") != "" {
+		this.Bh.CleanSecond,_= strconv.ParseInt(this.Config.Get("behaver", "cleansecond"),10,64)
 	} 
 	if this.Bh.IpMax > 0 {
 		go this.Bh.Clear()
