@@ -12,7 +12,7 @@ goweber是一個GO編寫的WEB框架，主要用於API服務。
 - 用戶行爲監控
 
 #### 數據結構
-![数据结构](structs.drawio.png)
+![数据结构](docs/structs.drawio.png)
 
 
 #### 安装教程
@@ -33,6 +33,7 @@ import (
 )
 func main() { 
     app := goweber.New()
+    defer app.Close() // 關閉file和chan
     app.Get("/", func(w http.ResponseWriter, r *http.Request) { 
         fmt.Fprintf(w, "Hello World!")
     })

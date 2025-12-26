@@ -47,9 +47,6 @@ type Apper struct {
 	// 路由中間件
 	// Route middleware
 	rMiddleware map[string]map[string][]MiddlewareFunc
-	// 緩存器
-	// Cache
-	Cache *Cacher
 	// 限流器
 	// Rate limiter
 	iplimiter map[string]*rate.Limiter
@@ -62,12 +59,6 @@ type Apper struct {
 	// 鎖
 	// Lock
 	mu sync.Mutex 
-	// jwt处理
-	// JWT processing
-	Jwt *Jwter
-	// 文件上传
-	// File upload
-	File *FileUploader
 	// 用戶行爲監控
 	// user behavior monitoring
 	Bh *Behaver
@@ -87,17 +78,12 @@ func New() *Apper {
 		},
 		msg: make(chan string),
 		ratelimit: 100,
-		Jwt: NewJwter(),
-		File: NewFileUploader(10<<20,nil,"./upload"),
 		Bh: NewBehaver(),
 	}
 	app.SetConfig()
 	app.SetLog()
 	app.SetPort()
-	app.SetCache()
 	app.SetLimit()
-	app.SetJwt()
-	app.SetFile()
 	app.SetBehaver()
 	return app
 }
@@ -157,18 +143,6 @@ func (this *Apper) SetPort() {
 	}
 }
 
-// SetCache 缓存设置
-// SetCache cache settings
-func (this *Apper) SetCache() { 
-	cachesize:= this.Config.Get("server", "cache")
-	if cachesize!="" && cachesize!="0" {
-		size,_:=strconv.ParseInt(cachesize,10,64)
-		this.Cache=NewCacher(size)
-		return
-	}
-	this.Cache=nil
-}
-
 // SetLimit 設置限流
 // SetLimit set rate limiting
 func (this *Apper) SetLimit() {
@@ -182,46 +156,6 @@ func (this *Apper) SetLimit() {
 	}
 	if this.Config.Get("server", "ratelimit") != "" {
 		this.ratelimit,_= strconv.Atoi(this.Config.Get("server", "ratelimit"))
-	}
-}
-
-// jwt 设置
-// JWT settings
-func (this *Apper) SetJwt() {
-	if this.Config.Get("jwt", "rint") != "" { 
-		this.Jwt.Rint,_= strconv.Atoi(this.Config.Get("jwt", "rint"))
-	}
-	if this.Config.Get("jwt", "exp") != "" {
-		this.Jwt.Exphour,_= strconv.Atoi(this.Config.Get("jwt", "exp"))
-	}
-	if this.Config.Get("jwt", "rstr") != "" {
-		this.Jwt.Rstr= this.Config.Get("jwt", "rstr")
-	}
-	if this.Config.Get("jwt", "version") != "" {
-		this.Jwt.Version= this.Config.Get("jwt", "version")
-	}
-}
-
-// SetFile 设置上传文件
-// SetFile set file upload
-func (this *Apper) SetFile() { 
-	if this.Config.Get("file", "size") != "" {
-		size,_:=strconv.ParseInt(this.Config.Get("file", "size"),10,64)
-		//转换成MB
-		// Convert to MB
-		this.File.MaxSize= size * 1024 * 1024
-	}
-	if this.Config.Get("file", "max") != "" {
-		this.File.MaxFiles,_= strconv.Atoi(this.Config.Get("file", "max")) 
-	}
-	if this.Config.Get("file", "path") != "" {
-		this.File.SavePath=this.Config.Get("file", "path")
-	}
-	if this.Config.Get("file", "type") != "" {
-		filetypes:=this.Config.Get("file", "type")
-		// 按逗号隔开，返回[]string
-		// Split by comma, return []string
-		this.File.AllowedTypes=strings.Split(filetypes, ",")
 	}
 }
 

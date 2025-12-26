@@ -38,8 +38,8 @@ func TestApp(t *testing.T) {
 		w.Write([]byte("中間件測試成功"))
 	}, rMiddleware1, rMiddleware2)
 	
-	// 緩存處理
-	cache:=app.Cache
+	// 緩存處理,64MB
+	cache:=NewCacher(64)
 	app.Get("/cache", func(w http.ResponseWriter, r *http.Request) {
 		if cache != nil {
 			if cache.IsCache(w,r) {
@@ -54,7 +54,7 @@ func TestApp(t *testing.T) {
 	})
 	
 	// 处理jwt
-	jwter:=app.Jwt
+	jwter:=NewJwter()
 	app.Get("/jwt/get", func(w http.ResponseWriter, r *http.Request) {
 		jwter.Key="F6987445"
 		token, err := jwter.Encode()
@@ -75,7 +75,7 @@ func TestApp(t *testing.T) {
 	 })
 
 	// * 测试文件上传
-	uploader := app.File
+	uploader := NewFileUploader(10<<20,nil,"./files")
 	app.Post("/upload", func(w http.ResponseWriter, r *http.Request) { 
 		uploader.FieldName = "s_file"
 		uploader.FieldNames = "s_files"
