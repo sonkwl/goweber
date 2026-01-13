@@ -1,0 +1,5 @@
+2026/01/13 10:25:53 apper HTTP is running in port:8080
+2026/01/13 10:26:09 ::1 GET /behaver Not Found 404
+2026/01/13 10:26:13 ::1 GET /cache 200 OK
+2026/01/13 10:26:15 ::1 GET /cache 200 OK
+2026/01/13 10:26:15 ::1 GET /cache 200 OK

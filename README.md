@@ -8,8 +8,10 @@ goweber是一個GO編寫的WEB框架，主要用於API服務。
 - 配置服务
 - 基於IP的限流
 - 中間件服務，支持全局和路由級
-- 支持JWT
-- 用戶行爲監控
+- 自定義JWT
+- 文件上傳
+- 查詢緩存
+- 用戶行爲監控(實驗項目，未完成)
 
 #### 數據結構
 ![数据结构](docs/structs.drawio.png)
@@ -43,7 +45,7 @@ func main() {
 ```
 
 #### 配置文件
-請保證config.ini在執行文件同目錄下
+請保證config.ini與執行文件同目錄下
 ```ini
 [server]
 # 網站端口
@@ -57,8 +59,6 @@ logmax = 1024000000
 
 # 緩存器，單位Mb
 # Cache, unit Mb
-# apper中有Cache结构指针
-# apper has Cache structure pointer
 cache = 1
 
 # 限流 ipmax監控最大IP數量>0，開啓限流，ratelimit每秒訪問次數
@@ -66,16 +66,16 @@ cache = 1
 ipmax=1000
 ratelimit=10
 
-# apper中有Jwt结构指针
-# apper has Jwt structure pointer
+# 自定義JWT
+# self-defined JWT
 [jwt]
 rint = 1
 rstr = WHSS
 version = V1
 exp = 8
 
-# apper中有File结构指针
-# apper has File structure pointer
+# 文件上傳
+# File upload
 [file]
 # 单位MB
 # Unit MB
@@ -89,17 +89,4 @@ path = ./files
 # 文件类型
 # File types
 type = .jpg,.png
-
-# 用戶行爲監控
-# user behaver monitor
-[behaver]
-# 最大監控IP數量, 0表示不監控
-# Maximum monitoring IP quantity, 0 means not monitored
-ipmax = 1000
-# 監控IP過期時間，秒
-# Monitoring IP expiration time, seconds
-expire = 300
-# 監控IP清理間隔，秒
-# Monitoring IP cleanup interval, seconds
-cleansecond = 300
 ```

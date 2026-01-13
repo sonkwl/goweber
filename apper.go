@@ -59,9 +59,6 @@ type Apper struct {
 	// 鎖
 	// Lock
 	mu sync.Mutex 
-	// 用戶行爲監控
-	// user behavior monitoring
-	Bh *Behaver
 }
 
 // New 创建并初始化一个新的Apper实例
@@ -78,13 +75,11 @@ func New() *Apper {
 		},
 		msg: make(chan string),
 		ratelimit: 100,
-		Bh: NewBehaver(),
 	}
 	app.SetConfig()
 	app.SetLog()
 	app.SetPort()
 	app.SetLimit()
-	app.SetBehaver()
 	return app
 }
 
@@ -156,22 +151,6 @@ func (this *Apper) SetLimit() {
 	}
 	if this.Config.Get("server", "ratelimit") != "" {
 		this.ratelimit,_= strconv.Atoi(this.Config.Get("server", "ratelimit"))
-	}
-}
-
-// SetBehaver
-func (this *Apper) SetBehaver() {
-	if this.Config.Get("behaver", "ipmax") != "" {
-		this.Bh.IpMax,_= strconv.Atoi(this.Config.Get("behaver", "ipmax"))
-	} 
-	if this.Config.Get("behaver", "ipmax") != "" {
-		this.Bh.Expire,_= strconv.ParseInt(this.Config.Get("behaver", "expire"),10,64)
-	}
-	if this.Config.Get("behaver", "cleansecond") != "" {
-		this.Bh.CleanSecond,_= strconv.ParseInt(this.Config.Get("behaver", "cleansecond"),10,64)
-	} 
-	if this.Bh.IpMax > 0 {
-		go this.Bh.Clear()
 	}
 }
 
@@ -310,25 +289,6 @@ func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	urlSpit := strings.Split(r.URL.String(), "?")
 	ipaddr := this.GetClientIP(r)
 	
-	// 檢測url
-	// if this.Bh.RegexUrl(r.URL.String()) {
-	// 	this.Bh.Lock(ipaddr)
-	// }
-	// IP行爲判斷
-	if this.Bh.CheckNotFound(ipaddr) {
-		this.Bh.Lock(ipaddr)
-	}
-	if this.Bh.CheckScan(ipaddr) {
-		this.Bh.Lock(ipaddr)
-	}
-	// IP是否鎖定
-	if this.Bh.IsLock(ipaddr) {
-		this.msg <- ipaddr+"被鎖定"
-		http.Error(w, ipaddr+"被鎖定", http.StatusTooManyRequests)
-		return
-	}
-	
-	
 	// * 限流處理
 	// * Rate limiting processing
 	if this.iplimiter!=nil{
@@ -366,11 +326,9 @@ func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	if h, ok := this.rmap[r.Method][urlSpit[0]]; ok {
 		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " 200 OK"
-		this.Bh.Record(ipaddr,200)
 		h(w, r)
 	} else {
 		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " Not Found 404"
-		this.Bh.Record(ipaddr,404)
 		http.NotFound(w, r)
 	}
 }
