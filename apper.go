@@ -249,9 +249,15 @@ func (this *Apper) Logger() {
 			if info.Size() > this.logmax && this.logmax > 0 {
 				//* 日志空間超過上綫，新增日志文件
 				//* Log space exceeds limit, create new log file
-				this.logfile.Close()
+				err=this.logfile.Close()
+				if err != nil {
+					panic(err)
+				}
 				infoname := info.Name()
-				os.Rename(infoname, infoname+strconv.FormatInt(time.Now().Unix(), 10))
+				err=os.Rename(infoname, infoname+strconv.FormatInt(time.Now().Unix(), 10))
+				if err != nil {
+					panic(err)
+				}
 				this.logfile, err = os.OpenFile(infoname, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
 				if err != nil {
 					panic(err)
