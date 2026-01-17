@@ -50,7 +50,6 @@ func NewBehaver() *Behaver {
 		Expire:300,
 		CleanSecond:300,
 	}
-	// go bh.Clear()
 	return bh
 }
 
@@ -159,8 +158,6 @@ func (this *Behaver) CheckScan(ip string) bool {
 					same_split++
 				}
 			}
-			// fmt.Println("time_split:",time_split)
-			// fmt.Println("same_split:",same_split)
 			// same_split>=7次，判斷
 			if same_split>=8 {
 				return true

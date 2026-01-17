@@ -76,7 +76,6 @@ func (this *Jwter) Decode(token string) (string, error) {
 		}
 		num = num - int64(this.Rint)
 		encodeToken += string(rune(num))
-		// encodeToken += strconv.Itoa(int(num))
 	}
 	return encodeToken, nil
 }
@@ -106,17 +105,12 @@ func (this *Jwter) Encode() (string, error) {
 	}
 	var token string
 	for i := 0; i < len(jwt); i++ {
-		// fmt.Println(int(jwt[i]))
 		num := strconv.FormatInt(int64(jwt[i])+int64(this.Rint), 16)
 		token += string(num)
 	}
 
 	rintstr := strconv.Itoa(this.Rint)
 
-	// fmt.Println(token+string(this.Rint)+hids)
-	// fmt.Println(token);
-	// fmt.Println(this.Rint);
-	// fmt.Println(hids);
 	return token + rintstr + hids, nil
 }
 

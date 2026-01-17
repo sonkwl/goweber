@@ -87,7 +87,10 @@ func New() *Apper {
 // Close closes application resources, including log file and message channel
 func (this *Apper) Close() {
 	if this.logfile != nil {
-		this.logfile.Close()
+		err:=this.logfile.Close()
+		if err != nil {
+			panic(err)
+		}
 	}
 	close(this.msg)
 }
@@ -124,7 +127,11 @@ func (this *Apper) SetLog() {
 	}
 	logmax := this.Config.Get("server", "logmax")
 	if logmax != "" {
-		this.logmax, _ = strconv.ParseInt(logmax, 10, 64)
+		ilogmax, err:= strconv.ParseInt(logmax, 10, 64)
+		if err != nil {
+			panic(err)
+		}
+		this.logmax = ilogmax
 	}
 }
 
@@ -140,7 +147,11 @@ func (this *Apper) SetPort() {
 // SetLimit set rate limiting
 func (this *Apper) SetLimit() {
 	if this.Config.Get("server", "ipmax") != "" {
-		this.ipmax ,_= strconv.Atoi(this.Config.Get("server", "ipmax"))
+		ipmax ,err := strconv.Atoi(this.Config.Get("server", "ipmax"))
+		if err != nil {
+			panic(err)
+		}
+		this.ipmax=ipmax
 		// 開啓限流
 		// Enable rate limiting
 		if this.ipmax>0 {
@@ -148,7 +159,11 @@ func (this *Apper) SetLimit() {
 		}
 	}
 	if this.Config.Get("server", "ratelimit") != "" {
-		this.ratelimit,_= strconv.Atoi(this.Config.Get("server", "ratelimit"))
+		iratelimit,err:= strconv.Atoi(this.Config.Get("server", "ratelimit"))
+		if err != nil {
+			panic(err)
+		}
+		this.ratelimit=iratelimit
 	}
 }
 
@@ -227,14 +242,20 @@ func (this *Apper) Logger() {
 	// fmt.Println("Logger")
 	for msg := range this.msg {
 		if this.log != nil {
-			info, _ := this.logfile.Stat()
+			info, err := this.logfile.Stat()
+			if err != nil {
+				panic(err)
+			}
 			if info.Size() > this.logmax && this.logmax > 0 {
 				//* 日志空間超過上綫，新增日志文件
 				//* Log space exceeds limit, create new log file
 				this.logfile.Close()
 				infoname := info.Name()
 				os.Rename(infoname, infoname+strconv.FormatInt(time.Now().Unix(), 10))
-				this.logfile, _ = os.OpenFile(infoname, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+				this.logfile, err = os.OpenFile(infoname, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+				if err != nil {
+					panic(err)
+				}
 				this.log = log.New(this.logfile, "", log.LstdFlags)
 			}
 			this.log.Println(msg)
@@ -339,7 +360,10 @@ func (this *Apper) Run() {
 	// this.msg <- "apper HTTP is running in port:" + this.port
 
 	server := &http.Server{Addr: ":" + this.port, Handler: this}
-	server.ListenAndServe()
+	err:=server.ListenAndServe()
+	if err!=nil{
+		panic(err)
+	}
 }
 
 // RunTLS 启动HTTPS服务器
@@ -350,5 +374,8 @@ func (this *Apper) RunTLS(certFile, keyFile string) {
 	// this.msg <- "apper HTTPS is running in port:" + this.port
 
 	server := &http.Server{Addr: ":" + this.port, Handler: this}
-	server.ListenAndServeTLS(certFile, keyFile)
+	err:=server.ListenAndServeTLS(certFile, keyFile)
+	if err!=nil{
+		panic(err)
+	}
 }
