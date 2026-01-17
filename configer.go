@@ -11,12 +11,17 @@ type Configer struct {
 	file   *os.File
 }
 
-func (this *Configer) SetFile(f *os.File) {
+func (this *Configer) SetFile(f *os.File) error {
 	this.file = f
-	_=this.ReadFile()
+	err:=this.ReadFile()
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (this *Configer) ReadFile() error {
+	defer this.file.Close()
 	scanner := bufio.NewScanner(this.file)
 	title := "gobal"
 	for scanner.Scan() {
@@ -52,10 +57,8 @@ func (this *Configer) ReadFile() error {
 		}
 	}
 	if err := scanner.Err(); err != nil {
-		_=this.file.Close()
 		return err
 	}
-	_=this.file.Close()
 	return nil
 }
 

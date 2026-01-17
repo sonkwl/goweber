@@ -99,14 +99,12 @@ func (this *Apper) SetConfig() {
 	//* Read configuration file
 	configfile, err := os.OpenFile("config.ini", os.O_RDONLY, 0666)
 	if err != nil {
-		// fmt.Println("讀取文件config.ini失敗")
-		// fmt.Println("Failed to read config.ini file")
-		panic("讀取文件config.ini失敗")
-		// panic("Failed to read config.ini file")
+		panic("讀取文件config.ini失敗1")
 	}
-	// defer configfile.Close()
-	this.Config.SetFile(configfile)
-	// fmt.Println(this.Config.params)
+	err=this.Config.SetFile(configfile)
+	if err != nil {
+		panic("讀取文件config.ini失敗2")
+	}
 }
 
 // SetLog 根据配置设置日志记录器

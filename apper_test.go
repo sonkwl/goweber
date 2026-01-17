@@ -28,7 +28,7 @@ func TestApp(t *testing.T) {
 
 	// 基礎功能
 	app.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World")
+		fmt.Fprintf(w,"%s", "Hello World")
 	})
 
 	// 中間件測試
@@ -36,7 +36,7 @@ func TestApp(t *testing.T) {
 	
 	app.Get("/middleware", func(w http.ResponseWriter, r *http.Request) {
 		// w.Write([]byte("中間件測試成功"))
-		fmt.Fprintf(w, "中間件測試成功")
+		fmt.Fprintf(w,"%s", "中間件測試成功")
 	}, rMiddleware1, rMiddleware2)
 	
 	// 緩存處理,64MB
@@ -48,7 +48,7 @@ func TestApp(t *testing.T) {
 				return
 			}
 		}
-		fmt.Fprintf(w, "緩存響應")
+		fmt.Fprintf(w,"%s", "緩存響應")
 		if cache!=nil{
 			cache.SetCache(r,1,"緩存響應，使用緩存")
 		}
@@ -61,10 +61,10 @@ func TestApp(t *testing.T) {
 		token, err := jwter.Encode()
 		if err != nil {
 			// w.Write([]byte(err.Error()))
-			fmt.Fprintf(w, err.Error())
+			fmt.Fprintf(w,"%s", err.Error())
 		} else {
 			// w.Write([]byte(token))
-			fmt.Fprintf(w, token)
+			fmt.Fprintf(w,"%s", token)
 		}
 	})
 	app.Get("/jwt/check",func(w http.ResponseWriter, r *http.Request) {
@@ -72,11 +72,11 @@ func TestApp(t *testing.T) {
 		err:=jwter.Validate(token)
 		if err != nil {
 			// w.Write([]byte("jwt驗證失敗,err:"+err.Error()))
-			fmt.Fprintf(w, "jwt驗證失敗,err:"+err.Error())
+			fmt.Fprintf(w,"jwt驗證失敗,err:%s",err.Error())
 			return	
 		}
 		// w.Write([]byte("jwt驗證成功,key:"+jwter.Key))
-		fmt.Fprintf(w, "jwt驗證成功,key:"+jwter.Key)
+		fmt.Fprintf(w,"jwt驗證成功,key:%s",jwter.Key)
 	 })
 
 	// * 测试文件上传
@@ -89,7 +89,7 @@ func TestApp(t *testing.T) {
 		savePaths,err:=uploader.HandleUpload(r)
 		if err != nil {
 			// w.Write([]byte("文件上传失败,err:"+err.Error()))
-			fmt.Fprintf(w, "文件上传失败,err:"+err.Error())
+			fmt.Fprintf(w,"文件上传失败,err:%s",err.Error())
 			return
 		}
 		fmt.Fprintf(w, "文件上传成功，保存路径: %v", savePaths)
