@@ -28,14 +28,15 @@ func TestApp(t *testing.T) {
 
 	// 基礎功能
 	app.Get("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("Hello World"))
+		fmt.Fprintf(w, "Hello World")
 	})
 
 	// 中間件測試
 	app.Use(gMiddleware)
 	
 	app.Get("/middleware", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("中間件測試成功"))
+		// w.Write([]byte("中間件測試成功"))
+		fmt.Fprintf(w, "中間件測試成功")
 	}, rMiddleware1, rMiddleware2)
 	
 	// 緩存處理,64MB
@@ -59,19 +60,23 @@ func TestApp(t *testing.T) {
 		jwter.Key="F6987445"
 		token, err := jwter.Encode()
 		if err != nil {
-			w.Write([]byte(err.Error()))
+			// w.Write([]byte(err.Error()))
+			fmt.Fprintf(w, err.Error())
 		} else {
-			w.Write([]byte(token))
+			// w.Write([]byte(token))
+			fmt.Fprintf(w, token)
 		}
 	})
 	app.Get("/jwt/check",func(w http.ResponseWriter, r *http.Request) {
 		token := r.URL.Query().Get("token")
 		err:=jwter.Validate(token)
 		if err != nil {
-			w.Write([]byte("jwt驗證失敗,err:"+err.Error()))
+			// w.Write([]byte("jwt驗證失敗,err:"+err.Error()))
+			fmt.Fprintf(w, "jwt驗證失敗,err:"+err.Error())
 			return	
 		}
-		w.Write([]byte("jwt驗證成功,key:"+jwter.Key))
+		// w.Write([]byte("jwt驗證成功,key:"+jwter.Key))
+		fmt.Fprintf(w, "jwt驗證成功,key:"+jwter.Key)
 	 })
 
 	// * 测试文件上传
@@ -83,7 +88,8 @@ func TestApp(t *testing.T) {
 		// * 处理文件上传
 		savePaths,err:=uploader.HandleUpload(r)
 		if err != nil {
-			w.Write([]byte("文件上传失败,err:"+err.Error()))
+			// w.Write([]byte("文件上传失败,err:"+err.Error()))
+			fmt.Fprintf(w, "文件上传失败,err:"+err.Error())
 			return
 		}
 		fmt.Fprintf(w, "文件上传成功，保存路径: %v", savePaths)

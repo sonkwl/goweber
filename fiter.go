@@ -85,7 +85,7 @@ func (f *FileUploader) HandleUpload(r *http.Request) ([]string, error) {
 		}
 
 		savePath, err := f.saveSingleFile(file, fileHeader)
-		file.Close() // 确保文件关闭
+		_=file.Close() // 确保文件关闭
 
 		if err != nil {
 			return nil, fmt.Errorf("保存文件 %s 失败: %v", fileHeader.Filename, err)
@@ -109,7 +109,7 @@ func (f *FileUploader) saveSingleFile(file multipart.File, header *multipart.Fil
 	
 	// 判断f.SavePaht目录是否存在
 	if _, err := os.Stat(f.SavePath); os.IsNotExist(err) {
-		os.MkdirAll(f.SavePath, os.ModePerm)
+		_=os.MkdirAll(f.SavePath, 0755)
 	}
 
 	// 创建新的文件名

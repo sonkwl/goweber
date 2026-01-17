@@ -13,7 +13,7 @@ type Configer struct {
 
 func (this *Configer) SetFile(f *os.File) {
 	this.file = f
-	this.ReadFile()
+	_=this.ReadFile()
 }
 
 func (this *Configer) ReadFile() error {
@@ -52,10 +52,10 @@ func (this *Configer) ReadFile() error {
 		}
 	}
 	if err := scanner.Err(); err != nil {
-		this.file.Close()
+		_=this.file.Close()
 		return err
 	}
-	this.file.Close()
+	_=this.file.Close()
 	return nil
 }
 
