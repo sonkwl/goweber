@@ -85,11 +85,9 @@ func (f *FileUploader) HandleUpload(r *http.Request) ([]string, error) {
 		}
 
 		savePath, err := f.saveSingleFile(file, fileHeader)
-		err=file.Close() // 确保文件关闭
-		if err != nil {
+		if err := file.Close(); err != nil {
 			return nil, fmt.Errorf("关闭文件失败: %s", fileHeader.Filename)
 		}
-
 		if err != nil {
 			return nil, fmt.Errorf("保存文件 %s 失败: %v", fileHeader.Filename, err)
 		}

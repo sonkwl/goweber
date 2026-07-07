@@ -13,11 +13,7 @@ type Configer struct {
 
 func (this *Configer) SetFile(f *os.File) error {
 	this.file = f
-	err:=this.ReadFile()
-	if err != nil {
-		return err
-	}
-	return nil
+	return this.ReadFile()
 }
 
 func (this *Configer) ReadFile() error {
@@ -56,10 +52,7 @@ func (this *Configer) ReadFile() error {
 			this.params[title][key] = val //赋值map
 		}
 	}
-	if err := scanner.Err(); err != nil {
-		return err
-	}
-	return nil
+	return scanner.Err()
 }
 
 func (this *Configer) Get(title string, key string) string {

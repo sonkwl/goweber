@@ -365,7 +365,11 @@ func (this *Apper) Run() {
 	this.msg <- "apper HTTP is running in port:" + this.port
 	// this.msg <- "apper HTTP is running in port:" + this.port
 
-	server := &http.Server{Addr: ":" + this.port, Handler: this}
+	server := &http.Server{
+		Addr: ":" + this.port, 
+		Handler: this,
+		ReadHeaderTimeout: 60 * time.Second,
+	}
 	err:=server.ListenAndServe()
 	if err!=nil{
 		panic(err)
@@ -379,7 +383,11 @@ func (this *Apper) RunTLS(certFile, keyFile string) {
 	this.msg <- "apper HTTPS is running in port:" + this.port
 	// this.msg <- "apper HTTPS is running in port:" + this.port
 
-	server := &http.Server{Addr: ":" + this.port, Handler: this}
+	server := &http.Server{
+		Addr: ":" + this.port, 
+		Handler: this,
+		ReadHeaderTimeout: 30 * time.Second,
+	}
 	err:=server.ListenAndServeTLS(certFile, keyFile)
 	if err!=nil{
 		panic(err)
