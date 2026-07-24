@@ -23,3 +23,203 @@
 2026/07/07 11:36:15 ::1 GET /jwt/check?token=47373a39383535362e323839343533353236352e65676764393a363a65323662663a646432623836626465383967626738336566111350754 200 OK
 2026/07/07 11:36:30 ::1 GET /upload.html Not Found 404
 2026/07/07 11:36:47 ::1 POST /upload 200 OK
+2026/07/24 13:18:13 apper HTTP is running in port:8080
+2026/07/24 13:18:40 ::1 GET / 200 OK
+2026/07/24 13:18:41 ::1 GET /favicon.ico Not Found 404
+2026/07/24 13:18:45 ::1 GET /123 Not Found 404
+2026/07/24 13:18:49 ::1 GET /123 Not Found 404
+2026/07/24 13:18:51 ::1 GET /123 Not Found 404
+2026/07/24 13:18:51 ::1 GET /123 Not Found 404
+2026/07/24 13:18:52 ::1 GET /123 Not Found 404
+2026/07/24 13:18:52 ::1 GET /123 Not Found 404
+2026/07/24 13:18:52 ::1 GET /123 Not Found 404
+2026/07/24 13:18:52 ::1 GET /123 Not Found 404
+2026/07/24 13:18:52 ::1 GET /123 Not Found 404
+2026/07/24 13:18:52 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:53 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:54 ::1 GET /123 Not Found 404
+2026/07/24 13:18:55 ::1 GET /123 Not Found 404
+2026/07/24 13:18:55 ::1 GET /123 Not Found 404
+2026/07/24 13:18:55 ::1 GET /123 Not Found 404
+2026/07/24 13:18:55 ::1 GET /123 Not Found 404
+2026/07/24 13:18:55 ::1 GET /123 Not Found 404
+2026/07/24 13:18:56 ::1 GET /123 Not Found 404
+2026/07/24 13:18:56 ::1 GET /123 Not Found 404
+2026/07/24 13:19:24 apper HTTP is running in port:8080
+2026/07/24 13:19:26 ::1 GET /123 Not Found 404
+2026/07/24 13:19:26 ::1 GET /123 Not Found 404
+2026/07/24 13:19:26 ::1 GET /123 Not Found 404
+2026/07/24 13:19:26 ::1 GET /123 Not Found 404
+2026/07/24 13:19:26 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:27 ::1 GET /123 Not Found 404
+2026/07/24 13:19:28 ::1 GET /123 Not Found 404
+2026/07/24 13:19:28 ::1 GET /123 Not Found 404
+2026/07/24 13:19:28 ::1 GET /123 Not Found 404
+2026/07/24 13:19:28 ::1 GET /123 Not Found 404
+2026/07/24 13:19:28 ::1 GET /123 Not Found 404
+2026/07/24 13:19:28 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:29 ::1 GET /123 Not Found 404
+2026/07/24 13:19:30 ::1 GET /123 Not Found 404
+2026/07/24 13:19:30 ::1 GET /123 Not Found 404
+2026/07/24 13:19:30 ::1 GET /123 Not Found 404
+2026/07/24 13:19:30 ::1 GET /123 Not Found 404
+2026/07/24 13:19:30 ::1 GET /123 Not Found 404
+2026/07/24 13:19:30 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:31 ::1 GET /123 Not Found 404
+2026/07/24 13:19:32 ::1 GET /123 Not Found 404
+2026/07/24 13:19:32 ::1 GET /123 Not Found 404
+2026/07/24 13:19:32 ::1 GET /123 Not Found 404
+2026/07/24 13:19:32 ::1 GET /123 Not Found 404
+2026/07/24 13:19:32 ::1 GET /123 Not Found 404
+2026/07/24 13:19:32 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:33 ::1 GET /123 Not Found 404
+2026/07/24 13:19:34 ::1 GET /123 Not Found 404
+2026/07/24 13:19:34 ::1 GET /123 Not Found 404
+2026/07/24 13:19:35 ::1 GET /123 Not Found 404
+2026/07/24 13:21:43 apper HTTP is running in port:8080
+2026/07/24 13:21:43 ::1 GET /123 Not Found 404
+2026/07/24 13:21:51 ::1 GET /123 Not Found 404
+2026/07/24 13:26:26 apper HTTP is running in port:8080
+2026/07/24 13:31:12 apper HTTP is running in port:8080
+2026/07/24 13:33:18 apper HTTP is running in port:8080
+2026/07/24 13:36:30 apper HTTP is running in port:8080
+2026/07/24 13:40:58 apper HTTP is running in port:8080
+2026/07/24 13:42:10 apper HTTP is running in port:8080
+2026/07/24 13:44:02 apper HTTP is running in port:8080
+2026/07/24 13:44:19 apper HTTP is running in port:8080
+2026/07/24 13:47:49 apper HTTP is running in port:8080
+2026/07/24 13:50:04 apper HTTP is running in port:8080
+2026/07/24 13:51:01 apper HTTP is running in port:8080
+2026/07/24 13:52:13 apper HTTP is running in port:8080
+2026/07/24 13:55:31 apper HTTP is running in port:8080
+2026/07/24 13:55:38 ::1 GET /123 Not Found 404
+2026/07/24 13:55:39 ::1 GET /123 Not Found 404
+2026/07/24 13:55:39 ::1 GET /123 Not Found 404
+2026/07/24 13:55:39 ::1 GET /123 Not Found 404
+2026/07/24 13:55:39 ::1 GET /123 Not Found 404
+2026/07/24 13:55:39 ::1 GET /123 rate limit
+2026/07/24 13:55:39 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:40 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:41 ::1 GET /123 rate limit
+2026/07/24 13:55:42 ::1 GET /123 rate limit
+2026/07/24 13:55:45 ::1 GET /123 rate limit
+2026/07/24 13:55:46 ::1 GET /123 rate limit
+2026/07/24 13:55:46 ::1 GET /123 rate limit
+2026/07/24 13:55:46 ::1 GET /123 rate limit
+2026/07/24 13:55:46 ::1 GET /123 rate limit
+2026/07/24 13:55:46 ::1 GET /123 rate limit
+2026/07/24 13:55:58 ::1 GET /123 rate limit
+2026/07/24 13:57:56 apper HTTP is running in port:8080
+2026/07/24 13:57:59 ::1 GET /123 Not Found 404
+2026/07/24 13:58:00 ::1 GET /123 Not Found 404
+2026/07/24 13:58:00 ::1 GET /123 Not Found 404
+2026/07/24 13:58:00 ::1 GET /123 Not Found 404
+2026/07/24 13:58:00 ::1 GET /123 Not Found 404
+2026/07/24 13:58:00 ::1 GET /123 Not Found 404
+2026/07/24 13:58:01 ::1 GET /123 Not Found 404
+2026/07/24 13:58:01 ::1 GET /123 rate limit
+2026/07/24 13:58:01 ::1 GET /123 rate limit
+2026/07/24 13:58:01 ::1 GET /123 rate limit
+2026/07/24 13:58:01 ::1 GET /123 rate limit
+2026/07/24 13:58:13 ::1 GET /monitor rate limit
+2026/07/24 13:58:29 ::1 GET /monitor rate limit
+2026/07/24 13:58:30 ::1 GET /monitor rate limit
+2026/07/24 13:58:31 ::1 GET /123 rate limit
+2026/07/24 14:16:14 apper HTTP is running in port:8080
+2026/07/24 14:16:14 ::1 GET /monitor 200 OK
+2026/07/24 14:17:25 apper HTTP is running in port:8080
+2026/07/24 14:17:29 ::1 GET /123 Not Found 404
+2026/07/24 14:17:29 ::1 GET /123 Not Found 404
+2026/07/24 14:17:29 ::1 GET /123 Not Found 404
+2026/07/24 14:17:29 ::1 GET /123 Not Found 404
+2026/07/24 14:17:29 ::1 GET /123 Not Found 404
+2026/07/24 14:17:29 ::1 GET /123 rate limit
+2026/07/24 14:17:30 ::1 GET /123 rate limit
+2026/07/24 14:17:30 ::1 GET /123 rate limit
+2026/07/24 14:17:30 ::1 GET /123 rate limit
+2026/07/24 14:17:30 ::1 GET /123 rate limit
+2026/07/24 14:17:42 ::1 GET /123 rate limit
+2026/07/24 14:18:25 ::1 GET / rate limit
+2026/07/24 14:18:26 ::1 GET /123 rate limit
+2026/07/24 14:18:27 ::1 GET /123 rate limit
+2026/07/24 14:19:35 ::1 GET /123 rate limit
+2026/07/24 14:19:46 ::1 GET /monitor rate limit
+2026/07/24 14:21:50 ::1 GET /monitor rate limit
+2026/07/24 14:21:51 ::1 GET /monitor rate limit
+2026/07/24 14:21:51 ::1 GET /monitor rate limit
+2026/07/24 14:22:13 ::1 GET /monitor rate limit
+2026/07/24 14:22:14 ::1 GET /monitor rate limit
+2026/07/24 14:22:21 ::1 GET /monitor rate limit
+2026/07/24 14:22:24 ::1 GET /monitor rate limit
+2026/07/24 14:22:29 ::1 GET /monitor rate limit
+2026/07/24 14:22:29 ::1 GET /monitor 200 OK
+2026/07/24 14:22:34 ::1 GET /monitor 200 OK
+2026/07/24 14:22:44 ::1 GET /123 Not Found 404
+2026/07/24 14:22:45 ::1 GET /123 Not Found 404
+2026/07/24 14:22:46 ::1 GET /123 Not Found 404
+2026/07/24 14:22:46 ::1 GET /123 Not Found 404
+2026/07/24 14:22:47 ::1 GET /123 Not Found 404
+2026/07/24 14:22:47 ::1 GET /123 Not Found 404
+2026/07/24 14:22:48 ::1 GET /123 Not Found 404
+2026/07/24 14:22:48 ::1 GET /123 Not Found 404
+2026/07/24 14:22:48 ::1 GET /123 Not Found 404
+2026/07/24 14:22:48 ::1 GET /123 Not Found 404
+2026/07/24 14:22:49 ::1 GET /123 Not Found 404
+2026/07/24 14:22:49 ::1 GET /123 rate limit
+2026/07/24 14:22:49 ::1 GET /123 rate limit
+2026/07/24 14:22:49 ::1 GET /123 rate limit
+2026/07/24 14:22:49 ::1 GET /123 rate limit
+2026/07/24 14:22:49 ::1 GET /123 rate limit
+2026/07/24 14:22:50 ::1 GET /monitor rate limit
+2026/07/24 14:22:51 ::1 GET /monitor rate limit
+2026/07/24 14:22:51 ::1 GET /monitor rate limit
+2026/07/24 14:23:20 apper HTTP is running in port:8080

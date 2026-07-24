@@ -94,7 +94,16 @@ func TestApp(t *testing.T) {
 		}
 		fmt.Fprintf(w, "文件上传成功，保存路径: %v", savePaths)
 	})
+	
+	// * 查看監控IP和鎖定IP
+	app.Get("/monitor", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println(app.rate.ErrorIps)
+		fmt.Println(app.rate.BlockIps)
+	})
 
+	fmt.Println("> 服務器信息")
 	fmt.Println(app)
+	fmt.Println("> 限流信息")
+	app.Print("rate")
 	app.Run()
 }

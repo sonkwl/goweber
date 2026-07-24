@@ -1,3 +1,4 @@
+// v1.0.3 2026/7/22 backup
 package goweber
 
 import (
@@ -9,6 +10,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"golang.org/x/time/rate"
+	"sync"
 )
 
 // 中間件類型
@@ -45,20 +48,18 @@ type Apper struct {
 	// 路由中間件
 	// Route middleware
 	rMiddleware map[string]map[string][]MiddlewareFunc
-	// 限流器 v1.1.0棄用
+	// 限流器
 	// Rate limiter
-	// iplimiter map[string]*rate.Limiter
-	// 最大監控IP數量 v1.1.0棄用
+	iplimiter map[string]*rate.Limiter
+	// 最大監控IP數量
 	// Maximum monitored IP count
-	// ipmax int
-	// 限流 v1.1.0棄用
+	ipmax int
+	// 限流
 	// Rate limit
-	// ratelimit int
-	// 鎖 限流 v1.1.0棄用
+	ratelimit int
+	// 鎖
 	// Lock
-	// mu sync.Mutex 
-	// * 限流器 v1.1.0
-	rate *Rater
+	mu sync.Mutex 
 }
 
 // New 创建并初始化一个新的Apper实例
@@ -74,24 +75,13 @@ func New() *Apper {
 			params: make(map[string]map[string]string),
 		},
 		msg: make(chan string),
-		rate: NewRater(),
+		ratelimit: 100,
 	}
 	app.SetConfig()
 	app.SetLog()
 	app.SetPort()
-	app.SetRate()
+	app.SetLimit()
 	return app
-}
-
-
-// 打印私有參數
-func (this *Apper) Print(key string) {
-    switch key{
-	case "rate":
-		fmt.Println(this.rate)
-	case "port":
-		fmt.Println(this.port)
-	}
 }
 
 // Close 关闭应用程序资源，包括日志文件和消息通道
@@ -156,41 +146,25 @@ func (this *Apper) SetPort() {
 
 // SetLimit 設置限流
 // SetLimit set rate limiting
-func (this *Apper) SetRate() {
-	if this.Config.Get("rate", "enable") != "" {
-		start ,err := strconv.Atoi(this.Config.Get("rate", "enable")) // 0 禁用 1 啟用
+func (this *Apper) SetLimit() {
+	if this.Config.Get("server", "ipmax") != "" {
+		ipmax ,err := strconv.Atoi(this.Config.Get("server", "ipmax"))
 		if err != nil {
 			panic(err)
 		}
-		this.rate.Start = start
+		this.ipmax=ipmax
+		// 開啓限流
+		// Enable rate limiting
+		if this.ipmax>0 {
+			this.iplimiter=make(map[string]*rate.Limiter,0)
+		}
 	}
-	if this.Config.Get("rate", "second") != "" {
-	    second,err := strconv.Atoi(this.Config.Get("rate", "second")) // 每秒允許請求次數
+	if this.Config.Get("server", "ratelimit") != "" {
+		iratelimit,err:= strconv.Atoi(this.Config.Get("server", "ratelimit"))
 		if err != nil {
 			panic(err)
 		}
-		this.rate.Second = second
-	}
-	if this.Config.Get("rate", "errmax") != "" {
-	    errmax,err := strconv.Atoi(this.Config.Get("rate", "errmax")) // 每秒允許錯誤次數
-		if err != nil {
-			panic(err)
-		}
-		this.rate.ErrMax = errmax
-	}
-	if this.Config.Get("rate", "ipmax") != "" {
-	    ipmax,err := strconv.Atoi(this.Config.Get("rate", "ipmax")) // 每秒允許IP請求次數
-		if err != nil {
-			panic(err)
-		}
-		this.rate.IpMax = ipmax
-	}
-	if this.Config.Get("rate", "blockminute") != "" {
-	    blockminute,err := strconv.Atoi(this.Config.Get("rate", "blockminute")) // 被封鎖時間
-		if err != nil {
-			panic(err)
-		}
-		this.rate.BlockMinute = blockminute
+		this.ratelimit=iratelimit
 	}
 }
 
@@ -298,6 +272,42 @@ func (this *Apper) Logger() {
 	}
 }
 
+// getLimiter 获取限流器
+// getLimiter get rate limiter
+func (this *Apper) getLimiter(ip string) *rate.Limiter {
+	this.mu.Lock()
+	defer this.mu.Unlock()
+	
+	if limiter,ok := this.iplimiter[ip]; ok {
+		return limiter
+	}
+	// IP數量
+	// IP count
+	if len(this.iplimiter) >= this.ipmax {
+		// 清除50%最早加入的IP
+		// Clear 50% of the earliest added IPs
+		this.clearLimiter()
+	}
+	this.iplimiter[ip] = rate.NewLimiter(rate.Every(1*time.Second), this.ratelimit)
+	return this.iplimiter[ip]
+}
+
+
+// clearLimiter 清除IP限流器
+// clearLimiter clear IP rate limiter
+func (this *Apper) clearLimiter() {
+	// 计算需要删除的数量（50%）
+	// Calculate the number to delete (50%)
+	removeCount := len(this.iplimiter) / 2
+	for i:=0;i<removeCount;i++ {
+		for k,_ := range this.iplimiter {
+			delete(this.iplimiter, k)
+		}
+	}
+	this.msg <- "清理限流列表50%的IP"
+	// this.msg <- "Clear 50% of IPs from rate limit list"
+}
+
 // ServeHTTP 实现http.Handler接口，处理HTTP请求
 // ServeHTTP implements the http.Handler interface to handle HTTP requests
 func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -307,11 +317,17 @@ func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	
 	// * 限流處理
 	// * Rate limiting processing
-	if this.rate.IsBlocked(ipaddr) {
-		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " rate limit"
-		http.Error(w, "Too Many Requests", http.StatusTooManyRequests)
-		return
+	if this.iplimiter!=nil{
+		limiter:=this.getLimiter(ipaddr)
+		if !limiter.Allow() {
+			this.msg <- "限流"
+			// this.msg <- "Rate limiting"
+			http.Error(w, "限流", http.StatusTooManyRequests)
+			// http.Error(w, "Rate limiting", http.StatusTooManyRequests)
+			return
+		}
 	}
+
 	// * 全局中間件處理
 	// * Global middleware processing
 	for _, g := range this.gMiddleware {
@@ -338,7 +354,6 @@ func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " 200 OK"
 		h(w, r)
 	} else {
-		this.rate.SetStatus(ipaddr) // * 限流處理
 		this.msg <- ipaddr + " " + r.Method + " " + r.URL.String() + " Not Found 404"
 		http.NotFound(w, r)
 	}
