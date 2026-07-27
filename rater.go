@@ -4,9 +4,11 @@ package goweber
 
 import (
 	"time"
+	"sync"
 )
 // 限流器數據結構
 type Rater struct {
+    sync.RWMutex // 添加读写锁
 	Start int // 是否開啓，0為關閉，1為開啓
     Second int // 監控秒
 	BlockMinute int // 封禁分鐘
@@ -40,6 +42,8 @@ func (this *Rater) SetStatus(ip string) {
 	if this.Start==0{
         return
 	}
+    this.Lock()
+	defer this.Unlock()
 	// 超過監控上綫，清理
     if len(this.ErrorIps)>this.IpMax{
         this.ClearErrorIps()
@@ -65,6 +69,8 @@ func (this *Rater) IsBlocked(ip string) bool {
 	if this.Start==0 {
         return false
 	}
+    this.RLock()
+	defer this.RUnlock()
     // * 測試使用
     // fmt.Println(this.ErrorIps)
     // fmt.Println(this.BlockIps)
@@ -84,6 +90,8 @@ func (this *Rater) IsBlocked(ip string) bool {
 
 // * 監控列表清理
 func (this *Rater) ClearErrorIps() {
+    this.Lock()
+    defer this.Unlock()
     for ip,ipData:=range this.ErrorIps{
         if time.Since(ipData.LastTime)>=time.Duration(this.Second) * time.Second {
             delete(this.ErrorIps,ip)
@@ -92,6 +100,8 @@ func (this *Rater) ClearErrorIps() {
 }
 // * 鎖定列表清理
 func (this *Rater) ClearBlockIps() {
+    this.Lock()
+    defer this.Unlock()
     for ip,_:=range this.BlockIps{
         if time.Since(this.BlockIps[ip])>=time.Duration(this.BlockMinute)*time.Minute{
             delete(this.BlockIps,ip)
