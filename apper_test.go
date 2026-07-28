@@ -95,10 +95,17 @@ func TestApp(t *testing.T) {
 		fmt.Fprintf(w, "文件上传成功，保存路径: %v", savePaths)
 	})
 	
-	// * 查看監控IP和鎖定IP
-	app.Get("/monitor", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println(app.rate.ErrorIps)
-		fmt.Println(app.rate.BlockIps)
+	// * 測試暴力破解監控
+	bruter:=NewBruter()
+	app.Get("/brute", func(w http.ResponseWriter, r *http.Request) {
+	    ip:=bruter.GetClientIP(r)
+		if bruter.IsBlocked(ip) {
+			fmt.Fprintf(w, "暴力破解，IP被封禁%s", bruter.BlockIps[ip])
+			return
+		}
+		// 出現錯誤時，將IP加入監控列表
+		fmt.Println(bruter)
+		bruter.SetStatus(ip)
 	})
 
 	fmt.Println("> 服務器信息")
