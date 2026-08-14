@@ -301,11 +301,16 @@ func (this *Apper) Logger() {
 // ServeHTTP 实现http.Handler接口，处理HTTP请求
 // ServeHTTP implements the http.Handler interface to handle HTTP requests
 func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	 // 设置CORS响应头
+	// * 设置CORS响应头
     w.Header().Set("Access-Control-Allow-Origin", "*")
     w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    // w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
-    // w.Header().Set("Access-Control-Max-Age", "86400")
+    w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
+	// * json請求會先發送OPTIONS，這裡需要處理
+	if r.Method == http.MethodOptions {
+        w.WriteHeader(http.StatusNoContent) // 回覆 204 No Content (或 http.StatusOK 200)
+        return
+    }
 	
 	urlSpit := strings.Split(r.URL.String(), "?")
 	ipaddr := this.GetClientIP(r)
