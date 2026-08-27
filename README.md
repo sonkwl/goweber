@@ -13,6 +13,7 @@ goweber是一個GO編寫的WEB框架，主要用於API服務。
 - 查詢緩存
 - 暴力破解防護
 - 跨域支持
+- 靜態目錄
 
 
 #### 數據結構
@@ -68,6 +69,9 @@ cache = 1
 # Rate limiting ipmax: maximum number of monitored IPs > 0, enable rate limiting, ratelimit: visits per second
 ipmax=1000
 ratelimit=20
+
+# v1.1.4引入靜態默認路徑
+static=static
 
 # v1.1.0以上版本功能
 [rate]

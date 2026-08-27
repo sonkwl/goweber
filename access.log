@@ -392,3 +392,192 @@
 2026/07/27 17:24:04 ::1 GET /brute 200 OK
 2026/07/27 17:24:04 ::1 GET /brute 200 OK
 2026/07/27 17:24:04 ::1 GET /brute 200 OK
+2026/08/27 11:23:17 apper HTTP is running in port:8080
+2026/08/27 11:23:36 ::1 GET / 200 OK
+2026/08/27 11:23:36 ::1 GET /favicon.ico Not Found 404
+2026/08/27 11:23:42 ::1 GET /static/index.html Not Found 404
+2026/08/27 11:24:11 ::1 GET /static/upload.html Not Found 404
+2026/08/27 11:24:13 ::1 GET /static/upload.html Not Found 404
+2026/08/27 11:25:27 apper HTTP is running in port:8080
+2026/08/27 11:25:29 ::1 GET /static/upload.html Not Found 404
+2026/08/27 11:25:30 ::1 GET /static/upload.html Not Found 404
+2026/08/27 11:26:08 ::1 GET /static/upload.html 200 OK
+2026/08/27 11:26:08 ::1 GET /static/upload.html/ 200 OK
+2026/08/27 11:26:09 ::1 GET /static/upload.html/ 200 OK
+2026/08/27 11:26:10 ::1 GET /static/upload.html/ 200 OK
+2026/08/27 11:26:13 ::1 GET /static/upload.html/ 200 OK
+2026/08/27 11:26:14 ::1 GET /static/upload.html/ 200 OK
+2026/08/27 11:26:32 apper HTTP is running in port:8080
+2026/08/27 11:26:38 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:26:39 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:26:41 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:28:11 apper HTTP is running in port:8080
+2026/08/27 11:28:15 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:28:17 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:28:21 ::1 GET /static/ Not Found 404
+2026/08/27 11:28:26 ::1 GET /static/index.html Not Found 404
+2026/08/27 11:28:38 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:29:09 apper HTTP is running in port:8080
+2026/08/27 11:29:13 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:29:43 apper HTTP is running in port:8080
+2026/08/27 11:30:02 apper HTTP is running in port:8080
+2026/08/27 11:30:05 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:30:07 ::1 GET /static/upload.html/ Not Found 404
+2026/08/27 11:33:27 apper HTTP is running in port:8080
+2026/08/27 11:33:30 ::1 GET /static/upload.html/ 200 OK
+2026/08/27 11:34:09 apper HTTP is running in port:8080
+2026/08/27 11:34:13 ::1 GET static/upload.html 200 OK
+2026/08/27 11:36:52 apper HTTP is running in port:8080
+2026/08/27 11:36:58 ::1 GET static/upload.html 200 OK
+2026/08/27 11:38:01 apper HTTP is running in port:8080
+2026/08/27 11:38:01 ::1 GET static/upload.html 200 OK
+2026/08/27 11:39:01 apper HTTP is running in port:8080
+2026/08/27 11:39:09 ::1 GET static/upload.html 200 OK
+2026/08/27 11:41:56 ::1 GET /.well-known/appspecific/com.chrome.devtools.jso Not Found 404
+2026/08/27 11:41:59 ::1 GET static/upload.html 200 OK
+2026/08/27 11:41:59 ::1 GET /.well-known/appspecific/com.chrome.devtools.jso Not Found 404
+2026/08/27 11:42:23 ::1 GET static/upload.html 200 OK
+2026/08/27 11:42:23 ::1 GET /.well-known/appspecific/com.chrome.devtools.jso Not Found 404
+2026/08/27 12:10:34 apper HTTP is running in port:8080
+2026/08/27 12:10:35 ::1 GET static/upload.html 200 OK
+2026/08/27 12:10:35 ::1 GET /.well-known/appspecific/com.chrome.devtools.jso Not Found 404
+2026/08/27 12:10:59 ::1 GET static/upload.html 200 OK
+2026/08/27 12:11:00 ::1 GET /.well-known/appspecific/com.chrome.devtools.jso Not Found 404
+2026/08/27 12:11:28 apper HTTP is running in port:8080
+2026/08/27 12:11:31 ::1 GET static/upload.html 200 OK
+2026/08/27 12:11:31 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:11:33 ::1 GET static/upload.html 200 OK
+2026/08/27 12:11:33 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:11:36 ::1 GET static/upload.html 200 OK
+2026/08/27 12:11:36 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:11:37 ::1 GET static/upload.html 200 OK
+2026/08/27 12:11:37 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:11:38 ::1 GET static/upload.html 200 OK
+2026/08/27 12:11:38 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:12:25 ::1 GET static/upload.html 200 OK
+2026/08/27 12:12:25 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:12:25 ::1 GET static/static.css 200 OK
+2026/08/27 12:12:49 ::1 GET static/upload.html 200 OK
+2026/08/27 12:12:49 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:12:49 ::1 GET static/static.css 200 OK
+2026/08/27 12:12:51 ::1 GET static/upload.html 200 OK
+2026/08/27 12:12:51 ::1 GET static/static.css 200 OK
+2026/08/27 12:12:51 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:12:55 ::1 GET static/upload.html 200 OK
+2026/08/27 12:12:55 ::1 GET static/static.css 200 OK
+2026/08/27 12:12:55 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:14:19 apper HTTP is running in port:8080
+2026/08/27 12:14:28 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:14:46 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:14:51 apper HTTP is running in port:8080
+2026/08/27 12:14:57 ::1 GET static/upload.html 200 OK
+2026/08/27 12:14:57 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:14:57 ::1 GET static/static.css 200 OK
+2026/08/27 12:16:48 ::1 GET static/upload.html 200 OK
+2026/08/27 12:16:48 ::1 GET static/static.css 200 OK
+2026/08/27 12:16:48 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:16:57 apper HTTP is running in port:8080
+2026/08/27 12:16:58 ::1 GET static/upload.html 200 OK
+2026/08/27 12:16:58 ::1 GET static/static.css 200 OK
+2026/08/27 12:16:58 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:17:00 ::1 GET static/upload.html 200 OK
+2026/08/27 12:17:00 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:17:00 ::1 GET static/static.css 200 OK
+2026/08/27 12:17:58 apper HTTP is running in port:8080
+2026/08/27 12:18:00 ::1 GET / 200 OK
+2026/08/27 12:18:00 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:18:03 ::1 GET static/upload.html 200 OK
+2026/08/27 12:18:03 ::1 GET static/static.css 200 OK
+2026/08/27 12:18:03 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:18:06 ::1 GET /index Not Found 404
+2026/08/27 12:18:06 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:18:14 ::1 GET /jwt/check?token=47373a39383535362e323839343533353236352e65676764393a363a65323662663a646432623836626465383967626738336566111350754 200 OK
+2026/08/27 12:18:14 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:18:29 ::1 GET static/upload.html 200 OK
+2026/08/27 12:18:29 ::1 GET static/static.css 200 OK
+2026/08/27 12:18:29 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 12:18:38 ::1 POST static 200 OK
+2026/08/27 12:18:38 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:12:09 apper HTTP is running in port:8080
+2026/08/27 13:12:11 ::1 GET static/upload.html 200 OK
+2026/08/27 13:12:11 ::1 GET static/static.css 200 OK
+2026/08/27 13:12:11 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:12:12 ::1 GET /jwt/check?token=47373a39383535362e323839343533353236352e65676764393a363a65323662663a646432623836626465383967626738336566111350754 200 OK
+2026/08/27 13:12:12 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:12:14 ::1 GET static/upload.html 200 OK
+2026/08/27 13:12:14 ::1 GET static/static.css 200 OK
+2026/08/27 13:12:14 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:12:15 ::1 GET static/upload.html 200 OK
+2026/08/27 13:12:15 ::1 GET static/static.css 200 OK
+2026/08/27 13:12:15 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:12:23 ::1 POST static 200 OK
+2026/08/27 13:12:23 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:13:41 ::1 GET static/upload.html 200 OK
+2026/08/27 13:13:41 ::1 GET static/static.css 200 OK
+2026/08/27 13:13:41 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:13:42 ::1 GET static/upload.html 200 OK
+2026/08/27 13:13:42 ::1 GET static/static.css 200 OK
+2026/08/27 13:13:42 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:13:45 ::1 GET static/upload.html 200 OK
+2026/08/27 13:13:45 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:13:45 ::1 GET static/static.css 200 OK
+2026/08/27 13:13:50 ::1 POST static 200 OK
+2026/08/27 13:13:51 ::1 POST static 200 OK
+2026/08/27 13:13:51 ::1 POST static 200 OK
+2026/08/27 13:14:19 ::1 GET static 200 OK
+2026/08/27 13:15:52 ::1 GET static/upload.html 200 OK
+2026/08/27 13:15:52 ::1 GET static/static.css 200 OK
+2026/08/27 13:15:52 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:15:53 ::1 GET static/upload.html 200 OK
+2026/08/27 13:15:53 ::1 GET static/static.css 200 OK
+2026/08/27 13:15:53 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:15:54 ::1 GET static/upload.html 200 OK
+2026/08/27 13:15:54 ::1 GET static/static.css 200 OK
+2026/08/27 13:15:54 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:15:55 ::1 GET static/upload.html 200 OK
+2026/08/27 13:15:55 ::1 GET static/static.css 200 OK
+2026/08/27 13:15:55 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:15:57 ::1 POST static 200 OK
+2026/08/27 13:15:57 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:16:14 ::1 GET / 200 OK
+2026/08/27 13:16:24 ::1 GET static 200 OK
+2026/08/27 13:16:45 ::1 GET static/upload.html 200 OK
+2026/08/27 13:16:45 ::1 GET static/static.css 200 OK
+2026/08/27 13:16:45 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:17:48 ::1 GET static/upload.html 200 OK
+2026/08/27 13:17:48 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:17:48 ::1 GET static/static.css 200 OK
+2026/08/27 13:21:33 apper HTTP is running in port:8080
+2026/08/27 13:21:37 ::1 GET static/upload.html 200 OK
+2026/08/27 13:21:37 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:21:37 ::1 GET static/static.css 200 OK
+2026/08/27 13:21:38 ::1 GET static/upload.html 200 OK
+2026/08/27 13:21:39 ::1 GET static/static.css 200 OK
+2026/08/27 13:21:39 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:21:42 ::1 POST /upload 200 OK
+2026/08/27 13:21:42 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:21:46 ::1 GET static/upload.html 200 OK
+2026/08/27 13:21:46 ::1 GET static/static.css 200 OK
+2026/08/27 13:21:46 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:22:04 ::1 GET static/upload.html 200 OK
+2026/08/27 13:22:04 ::1 GET static/static.css 200 OK
+2026/08/27 13:22:04 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:22:06 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:22:08 ::1 GET static/upload.html 200 OK
+2026/08/27 13:22:08 ::1 GET static/static.css 200 OK
+2026/08/27 13:22:08 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:22:09 ::1 GET static/upload.html 200 OK
+2026/08/27 13:22:09 ::1 GET static/static.css 200 OK
+2026/08/27 13:22:09 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:22:10 ::1 GET static/upload.html 200 OK
+2026/08/27 13:22:10 ::1 GET static/static.css 200 OK
+2026/08/27 13:22:10 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:27:44 ::1 GET static/upload.html 200 OK
+2026/08/27 13:27:44 ::1 GET static/static.css 200 OK
+2026/08/27 13:27:44 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:27:54 ::1 GET static/upload.html 200 OK
+2026/08/27 13:27:54 ::1 GET static/static.css 200 OK
+2026/08/27 13:27:54 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/08/27 13:27:55 ::1 GET static/upload.html 200 OK
+2026/08/27 13:27:55 ::1 GET static/static.css 200 OK
+2026/08/27 13:27:55 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404

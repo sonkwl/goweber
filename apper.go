@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"path"
 )
 
 // 中間件類型
@@ -59,6 +60,8 @@ type Apper struct {
 	// mu sync.Mutex 
 	// * 限流器 v1.1.0
 	rate *Rater
+	// * 靜態陌路 v1.1.4
+	staticDir string
 }
 
 // New 创建并初始化一个新的Apper实例
@@ -75,11 +78,13 @@ func New() *Apper {
 		},
 		msg: make(chan string),
 		rate: NewRater(),
+		staticDir: "", // 默認不支持靜態目錄
 	}
 	app.SetConfig()
 	app.SetLog()
 	app.SetPort()
 	app.SetRate()
+	app.SetStatic()
 	return app
 }
 
@@ -104,6 +109,14 @@ func (this *Apper) Close() {
 		}
 	}
 	close(this.msg)
+}
+
+// SetStatic 设置静态文件目录
+// SetStatic sets the static file directory
+func (this *Apper) SetStatic() {
+	if this.Config.Get("server", "static") != "" {
+		this.staticDir = this.Config.Get("server", "static")
+	}
 }
 
 // SetConfig 从config.ini文件中读取配置信息
@@ -314,6 +327,21 @@ func (this *Apper) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	
 	urlSpit := strings.Split(r.URL.String(), "?")
 	ipaddr := this.GetClientIP(r)
+	
+	// * 靜態目錄處理
+	if this.staticDir!="" &&  strings.Contains(r.URL.Path, this.staticDir) {
+	    file:=path.Join(this.staticDir, r.URL.Path[len(this.staticDir)+1:])
+		if _, err := os.Stat(file); err == nil {
+			// * 處理/結尾
+			if r.URL.Path[len(r.URL.Path)-1:] == "/" {
+				http.NotFound(w, r)
+				return
+			}
+			http.ServeFile(w, r, file)
+			this.msg <- ipaddr + " " + r.Method + " " + file + " 200 OK"
+			return
+		}
+	}
 	
 	// * 限流處理
 	// * Rate limiting processing
