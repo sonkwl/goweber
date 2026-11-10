@@ -581,3 +581,4 @@
 2026/08/27 13:27:55 ::1 GET static/upload.html 200 OK
 2026/08/27 13:27:55 ::1 GET static/static.css 200 OK
 2026/08/27 13:27:55 ::1 GET /.well-known/appspecific/com.chrome.devtools.json Not Found 404
+2026/11/10 09:27:47 apper HTTP is running in port:8080
